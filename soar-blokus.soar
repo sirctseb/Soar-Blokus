@@ -1,0 +1,3 @@
+pushd soar-blokus
+source soar-blokus_source.soar
+popd

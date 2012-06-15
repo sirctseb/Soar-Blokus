@@ -1,0 +1,44 @@
+sp {propose*initialize-soar-blokus
+   (state <s> ^superstate nil
+#             -^name)
+             -^board.square (^x 19 ^y 19))
+-->
+   (<s> ^operator <o> +)
+   (<o> ^name initialize-soar-blokus)
+}
+
+#sp {apply*initialize-soar-blokus
+#   (state <s> ^operator <op>)
+#   (<op> ^name initialize-soar-blokus)
+#-->
+#   (<s> ^name soar-blokus)
+#   (<s> ^board <board>)
+#}
+
+sp {propose*construct-board
+   (state <s> ^name initialize-soar-blokus)
+-->
+   (<s> ^operator <o> + >)
+   (<o> ^name construct-board)
+}
+
+sp {apply*construct-board*create*board
+   (state <s> ^name initialize-soar-blokus
+              ^operator.name construct-board
+              ^top-state <ts>)
+-->
+   (<ts> ^board <b>   # create root board structure
+         ^name scope) # also add name
+}
+# add the 400 squares on the board and indicate that they have no color
+gp {apply*construct-board*create*square
+   (state <s> ^name initialize-soar-blokus
+              ^operator.name construct-board
+              ^top-state <ts>)
+   (<ts> ^board <board>)
+-->
+   (<board> ^square <square>)
+   (<square> ^x [0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19]
+             ^y [0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19]
+             ^color none)
+}
