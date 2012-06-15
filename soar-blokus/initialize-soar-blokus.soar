@@ -75,9 +75,9 @@ sp {apply*construct-hand*l5
    (<hand> ^block <l5>)
    # name it and create orientations
    # TODO color?
-   (<l5> ^name l5 ^orientation <O1> <O2> <O3> <O4>)
+   (<l5> ^name l5 ^symmetry reflection r2 ^orientation <O1>)
    # add squares to first orientation
-   (<O1> ^square <O1S1> <O1S2> <O1S3> <O1S4> <O1S5>)
+   (<O1> ^base yes ^square <O1S1> <O1S2> <O1S3> <O1S4> <O1S5>)
    # fill in square info
    (<O1S1> ^x 0 ^y 0 ^corner nw sw)
    (<O1S2> ^x 1 ^y 0)
@@ -85,9 +85,72 @@ sp {apply*construct-hand*l5
    (<O1S4> ^x 3 ^y 0)
    (<O1S5> ^x 4 ^y 0 ^corner ne se)
 }
+
+# elaborate other orientations
+# create the other orientation structure for (r2, reflection) blocks
+sp {elaborate*block*orientation*r2*reflection
+   (state <s> ^hand.block <block>)
+   (<block> -^symmetry r1
+             ^orientation (<base> ^base yes))
+-->
+   (<block> ^orientation <Or1>)
+   (<Or1> ^rotation yes
+          ^from <base>)
+}
+# create rotation structures for non r2 blocks
+sp {elaborate*block*orientation*no*r2
+   (state <s> ^hand.block <block>)
+   (<block> -^symmetry r2
+             ^orientation <base> <r1>)
+   (<base> ^base yes)
+   (<r1> ^rotation yes ^from <base>)
+-->
+   (<block> ^orientation <r2> <r3>)
+   (<r2> ^rotation yes ^from <r1>)
+   (<r3> ^rotation yes ^from <r2>)
+}
+# create reflected structures for non ref block
+sp {elaborate*block*orientation*no*ref
+   (state <s> ^hand.block <block>)
+   (<block> -^symmetry reflection
+             ^orientation <or>)
+   (<or> ^<< base rotation >>)
+   (<or> -^reflection yes)
+-->
+   (<block> ^orientation <reflected>)
+   (<reflected> ^reflection yes
+                ^from <or>)
+}
+# copy squares with rotations
+sp {elaborate*copy*and*transform*squares*rotations
+   (state <s> ^hand.block <block>)
+   (<block> ^orientation <base> <rotation>)
+   (<base> ^square (<sq> ^x <x> ^y <y>))
+   (<rotation> ^rotation yes
+               ^from <base>)
+-->
+   (<rotation> ^square <rsq>)
+   (<rsq> ^x (- 0 <y>) ^y <x>)
+}
+# copy squares with reflections
+sp {elaborate*copy*and*transform*square*reflection
+   (state <s> ^hand.block <block>)
+   (<block> ^orientation <base> <reflection>)
+   (<base> ^square (<sq> ^x <x> ^y <y>))
+   (<reflection> ^reflection yes
+                 ^from <base>)
+-->
+   (<reflection> ^square <rsq>)
+   (<rsq> ^x (- 0 <x>) ^y <y>)
+}
+# TODO corner elaborations
+# copy adjusted corners to transformed squares
+#sp {elaborate*
+
+
 # elaborate that we are done initializing
 sp {elaborate*init*done
-   (state <s> ^name initialize-soar-blokus
+   (state <s> ^disable yes ^name initialize-soar-blokus
               ^top-state <ts>)
    # check for whatever the last thing done is
    (<ts> ^hand.block <block>)
