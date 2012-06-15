@@ -79,11 +79,11 @@ sp {apply*construct-hand*l5
    # add squares to first orientation
    (<O1> ^base yes ^square <O1S1> <O1S2> <O1S3> <O1S4> <O1S5>)
    # fill in square info
-   (<O1S1> ^x 0 ^y 0 ^corner nw sw)
+   (<O1S1> ^x 0 ^y 0)
    (<O1S2> ^x 1 ^y 0)
    (<O1S3> ^x 2 ^y 0)
    (<O1S4> ^x 3 ^y 0)
-   (<O1S5> ^x 4 ^y 0 ^corner ne se)
+   (<O1S5> ^x 4 ^y 0)
 }
 # construct block O
 sp {apply*construct-hand*O
@@ -99,10 +99,10 @@ sp {apply*construct-hand*O
    # add squares to orientation
    (<O1> ^base yes ^square <S1> <S2> <S3> <S4>)
    # fille in square info
-   (<S1> ^x 0 ^y 0 ^corner sw)
-   (<S2> ^x 0 ^y 1 ^corner nw)
-   (<S3> ^x 1 ^y 0 ^corner se)
-   (<S4> ^x 1 ^y 1 ^corner ne)
+   (<S1> ^x 0 ^y 0)
+   (<S2> ^x 0 ^y 1)
+   (<S3> ^x 1 ^y 0)
+   (<S4> ^x 1 ^y 1)
 }
 # construct block Z4
 sp {apply*construct-hand*Z4
@@ -118,10 +118,10 @@ sp {apply*construct-hand*Z4
    # add squares to orientation
    (<O1> ^base yes ^square <S1> <S2> <S3> <S4>)
    # fill in square info
-   (<S1> ^x 0 ^y 0 ^corner sw se)
-   (<S2> ^x 0 ^y 1 ^corner ne)
-   (<S3> ^x -1 ^y 1 ^corner sw)
-   (<S4> ^x -1 ^y 2 ^corner nw ne)
+   (<S1> ^x 0 ^y 0)
+   (<S2> ^x 0 ^y 1 )
+   (<S3> ^x -1 ^y 1)
+   (<S4> ^x -1 ^y 2)
 }
 
 # construct block V3
@@ -138,9 +138,9 @@ sp {apply*construct-hand*V3
    # add square to orientation
    (<O1> ^base yes ^square <S1> <S2> <S3>)
    # fill in square info
-   (<S1> ^x 0 ^y 0 ^corner sw se)
-   (<S2> ^x 0 ^y 1 ^corner ne)
-   (<S3> ^x -1 ^y 1 ^corner nw sw)
+   (<S1> ^x 0 ^y 0)
+   (<S2> ^x 0 ^y 1)
+   (<S3> ^x -1 ^y 1)
 }
 
 # construct block L4
@@ -157,10 +157,10 @@ sp {apply*construct-hand*L4
    # add squares to orientation
    (<O1> ^base yes ^square <S1> <S2> <S3> <S4>)
    # fill in square info
-   (<S1> ^x 0 ^y 0 ^corner sw)
-   (<S2> ^x 0 ^y 1 ^corner nw ne)
+   (<S1> ^x 0 ^y 0)
+   (<S2> ^x 0 ^y 1)
    (<S3> ^x 1 ^y 0)
-   (<S4> ^x 2 ^y 0 ^corner ne se)
+   (<S4> ^x 2 ^y 0)
 }
 
 # elaborate other orientations
@@ -220,6 +220,61 @@ sp {elaborate*copy*and*transform*square*reflection
    (<reflection> ^square <rsq>)
    (<rsq> ^x (- 0 <x>) ^y <y>)
 }
+sp {north*edge
+   (state <s> ^hand.block.orientation <o>)
+   (<o> ^square (<edge> ^x <x> ^y <y>))
+   (<s> ^north (^from <y> ^to <new-y>))
+  -(<o> ^square (^x <x> ^y <new-y>))
+-->
+   (<edge> ^edge n)
+}
+sp {west*edge
+   (state <s> ^hand.block.orientation <o>)
+   (<o> ^square (<edge> ^x <x> ^y <y>))
+   (<s> ^east (^from <new-x> ^to <x>))
+  -(<o> ^square (^x <new-x> ^y <y>))
+-->
+   (<edge> ^edge w)
+}
+sp {northwest*corner
+   (state <s> ^hand.block.orientation.square(<corner> ^edge n w))
+-->
+   (<corner> ^corner nw)
+}
+# elaborate squares with their attachment corners
+#sp {elaborate*square*attachment*corners*nw
+#   (state <s> ^hand.block.orientation <O>)
+#   (<O> ^square (<corner> ^north.x <nx> ^north.y <ny> ^west.x <wx> ^west.y <wy>))
+#  -(<O> ^square (^x <nx> ^y <ny>))
+#  -(<O> ^square (^x <wx> ^y <wy>))
+#-->
+#   (<corner> ^corner nw-old)
+#}
+#sp {cardinal*directions
+#   (state <s1> ^hand.block.orientation <O>)
+#   (<O> ^square (<square> ^x <x> ^y <y>))
+#-->
+#   (<square> ^north <n> ^south <s> ^east <e> ^west <w>)
+#   (<n> ^x <x> ^y (+ <y> 1))
+#   (<s> ^x <x> ^y (- <y> 1))
+#   (<e> ^x (+ <x> 1) ^y <y>)
+#   (<w> ^x (- <x> 1) ^y <y>)
+#}
+
+gp {reference*dirs
+   (state <s> ^superstate nil)
+-->
+   (<s> ^[north east] <dir>)
+   (<dir> ^from [-3 -2 -1 0 1 2 3 4])
+}
+sp {elaborate*vectors
+   (state <s> ^superstate nil
+              ^<< north east >> (<dir> ^from <from>))
+-->
+   (<dir> ^to (+ 1 <from>))
+}
+
+
 # TODO corner elaborations
 # copy adjusted corners to transformed squares
 #sp {elaborate*
