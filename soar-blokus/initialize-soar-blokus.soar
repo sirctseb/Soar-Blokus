@@ -51,7 +51,7 @@ sp {propose*construct-hand
    # wait until the board is created
    # actually the hand doesn't depend on the board,
    # but this way we can enforce that we know the last thing in init
-   (<ts> ^board)
+   (<ts> ^board.square(^x 19 ^y 19))
 -->
    (<s> ^operator <o> + >)
    (<o> ^name construct-hand)
@@ -59,7 +59,8 @@ sp {propose*construct-hand
 # construct the root hand structure
 sp {apply*construct-hand
    (state <s> ^name initialize-soar-blokus
-              ^top-state <ts>)
+              ^top-state <ts>
+              ^operator.name construct-hand)
 -->
    (<ts> ^hand <hand>)
 }
@@ -67,7 +68,8 @@ sp {apply*construct-hand
 # construct block l5
 sp {apply*construct-hand*l5
    (state <s> ^name initialize-soar-blokus
-              ^top-state.hand <hand>)
+              ^top-state.hand <hand>
+              ^operator.name construct-hand)
 -->
    # add the block
    (<hand> ^block <l5>)
@@ -89,8 +91,8 @@ sp {elaborate*init*done
               ^top-state <ts>)
    # check for whatever the last thing done is
    (<ts> ^hand.block <block>)
-   (<block> ^name l5 ^orientation <O1>)
-   (<O1> ^x 4 ^y 0 ^corner ne se)
+   (<block> ^name l5 ^orientation.square <sq>)
+   (<sq> ^x 4 ^y 0 ^corner ne se)
 -->
    (<ts> ^init done)
 }
