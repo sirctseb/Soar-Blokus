@@ -85,6 +85,83 @@ sp {apply*construct-hand*l5
    (<O1S4> ^x 3 ^y 0)
    (<O1S5> ^x 4 ^y 0 ^corner ne se)
 }
+# construct block O
+sp {apply*construct-hand*O
+   (state <s> ^name initialize-soar-blokus
+              ^top-state.hand <hand>
+              ^operator.name construct-hand)
+-->
+   # add the block
+   (<hand> ^block <O>)
+   # name it and create orientations
+   # TODO color?
+   (<O> ^name O ^symmetry reflection r2 r1 ^orientation <O1>)
+   # add squares to orientation
+   (<O1> ^base yes ^square <S1> <S2> <S3> <S4>)
+   # fille in square info
+   (<S1> ^x 0 ^y 0 ^corner sw)
+   (<S2> ^x 0 ^y 1 ^corner nw)
+   (<S3> ^x 1 ^y 0 ^corner se)
+   (<S4> ^x 1 ^y 1 ^corner ne)
+}
+# construct block Z4
+sp {apply*construct-hand*Z4
+   (state <s> ^name initialize-soar-blokus
+              ^top-state.hand <hand>
+              ^operator.name construct-hand)
+-->
+   # add the block
+   (<hand> ^block <Z4>)
+   # name it and create orientations
+   # TODO color?
+   (<Z4> ^name Z4 ^symmetry r2 ^orientation <O1>)
+   # add squares to orientation
+   (<O1> ^base yes ^square <S1> <S2> <S3> <S4>)
+   # fill in square info
+   (<S1> ^x 0 ^y 0 ^corner sw se)
+   (<S2> ^x 0 ^y 1 ^corner ne)
+   (<S3> ^x -1 ^y 1 ^corner sw)
+   (<S4> ^x -1 ^y 2 ^corner nw ne)
+}
+
+# construct block V3
+sp {apply*construct-hand*V3
+   (state <s> ^name initialize-soar-blokus
+              ^top-state.hand <hand>
+              ^operator.name construct-hand)
+-->
+   # add the block
+   (<hand> ^block <V3>)
+   # name it anc create orientation
+   # TODO color?
+   (<V3> ^name V3 ^symmetry reflection ^orientation <O1>)
+   # add square to orientation
+   (<O1> ^base yes ^square <S1> <S2> <S3>)
+   # fill in square info
+   (<S1> ^x 0 ^y 0 ^corner sw se)
+   (<S2> ^x 0 ^y 1 ^corner ne)
+   (<S3> ^x -1 ^y 1 ^corner nw sw)
+}
+
+# construct block L4
+sp {apply*construct-hand*L4
+   (state <s> ^name initialize-soar-blokus
+              ^top-state.hand <hand>
+              ^operator.name construct-hand)
+-->
+   # add the block
+   (<hand> ^block <L4>)
+   # name it and create orientation
+   # TODO color?
+   (<L4> ^name L4 ^orientation <O1>)
+   # add squares to orientation
+   (<O1> ^base yes ^square <S1> <S2> <S3> <S4>)
+   # fill in square info
+   (<S1> ^x 0 ^y 0 ^corner sw)
+   (<S2> ^x 0 ^y 1 ^corner nw ne)
+   (<S3> ^x 1 ^y 0)
+   (<S4> ^x 2 ^y 0 ^corner ne se)
+}
 
 # elaborate other orientations
 # create the other orientation structure for (r2, reflection) blocks
