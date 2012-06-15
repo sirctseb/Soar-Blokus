@@ -1,7 +1,8 @@
 sp {propose*initialize-soar-blokus
    (state <s> ^superstate nil
 #             -^name)
-             -^board.square (^x 19 ^y 19))
+#             -^board.square (^x 19 ^y 19))
+             -^init done)
 -->
    (<s> ^operator <o> +)
    (<o> ^name initialize-soar-blokus)
@@ -18,7 +19,7 @@ sp {propose*initialize-soar-blokus
 sp {propose*construct-board
    (state <s> ^name initialize-soar-blokus)
 -->
-   (<s> ^operator <o> + >)
+   (<s> ^operator <o> +)
    (<o> ^name construct-board)
 }
 
@@ -41,4 +42,55 @@ gp {apply*construct-board*create*square
    (<square> ^x [0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19]
              ^y [0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19]
              ^color none)
+}
+
+# propose to construct the hand
+sp {propose*construct-hand
+   (state <s> ^name initialize-soar-blokus
+              ^top-state <ts>)
+   # wait until the board is created
+   # actually the hand doesn't depend on the board,
+   # but this way we can enforce that we know the last thing in init
+   (<ts> ^board)
+-->
+   (<s> ^operator <o> + >)
+   (<o> ^name construct-hand)
+}
+# construct the root hand structure
+sp {apply*construct-hand
+   (state <s> ^name initialize-soar-blokus
+              ^top-state <ts>)
+-->
+   (<ts> ^hand <hand>)
+}
+# names from http://www.c2strategy.wordpress.com/2011/04/10/piece-names/
+# construct block l5
+sp {apply*construct-hand*l5
+   (state <s> ^name initialize-soar-blokus
+              ^top-state.hand <hand>)
+-->
+   # add the block
+   (<hand> ^block <l5>)
+   # name it and create orientations
+   # TODO color?
+   (<l5> ^name l5 ^orientation <O1> <O2> <O3> <O4>)
+   # add squares to first orientation
+   (<O1> ^square <O1S1> <O1S2> <O1S3> <O1S4> <O1S5>)
+   # fill in square info
+   (<O1S1> ^x 0 ^y 0 ^corner nw sw)
+   (<O1S2> ^x 1 ^y 0)
+   (<O1S3> ^x 2 ^y 0)
+   (<O1S4> ^x 3 ^y 0)
+   (<O1S5> ^x 4 ^y 0 ^corner ne se)
+}
+# elaborate that we are done initializing
+sp {elaborate*init*done
+   (state <s> ^name initialize-soar-blokus
+              ^top-state <ts>)
+   # check for whatever the last thing done is
+   (<ts> ^hand.block <block>)
+   (<block> ^name l5 ^orientation <O1>)
+   (<O1> ^x 4 ^y 0 ^corner ne se)
+-->
+   (<ts> ^init done)
 }
