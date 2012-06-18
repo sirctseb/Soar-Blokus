@@ -1,2 +1,5 @@
 source _all.soar
+source board-edges-corners.soar
+source board-neighbors.soar
+source hand-edges-corners.soar
 source top-state.soar

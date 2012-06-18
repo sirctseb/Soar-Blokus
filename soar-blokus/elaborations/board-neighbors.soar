@@ -1,0 +1,78 @@
+# elaborate square with a neighbors structure
+sp {elaborate*board*neighbors
+   (state <s> ^board.square <square>)
+-->
+   (<square> ^neighbors <neighbors>)
+}
+# elaborate squares with references to their neighbors
+sp {elaborate*board*neighbors*north
+   (state <s> ^board.square <square> <north>)
+   # match a square
+   (<square> ^neighbors <neighbors>)
+   # match location of square
+   (<square> ^x <x> ^y <y>)
+   # match location north of square
+   (<s> ^dir.north (^from <y> ^to <north-of-y>))
+   # get square at north location
+   (<north> ^x <x> ^y <north-of-y>)
+-->
+   # record square to the north
+   (<neighbors> ^north <north>)
+}
+sp {elaborate*board*neighbors*south
+   (state <s> ^board.square <square> <north>)
+   (<square> ^neighbors.north.neighbors <neighbors>)
+-->
+   (<neighbors> ^south <square>)
+}
+sp {elaborate*board*neighbors*east
+   (state <s> ^board.square <square> <east>)
+   (<square> ^x <x> ^y <y> ^neighbors <neighbors>)
+   # match location east of square
+   (<s> ^dir.east (^from <x> ^to <east-of-x>))
+   # get square at east location
+   (<east> ^x <east-of-x> ^y <y>)
+-->
+   # record square to the east
+   (<neighbors> ^east <east>)
+}
+sp {elaborate*board*neighbors*west
+   (state <s> ^board.square <square> <east>)
+   (<square> ^neighbors.east.neighbors <neighbors>)
+-->
+   (<neighbors> ^west <square>)
+}
+
+# elaborate squares with kitty corner reference
+sp {elaborate*board*neighbors*nw
+   (state <s> ^board.square <square> <nw>)
+   (<square> ^neighbors
+         (<neighbors>
+           ^north.neighbors.west <nw>))
+-->
+   (<neighbors> ^nw <nw>)
+}
+sp {elaborate*board*neighbors*ne
+   (state <s> ^board.square <square> <ne>)
+   (<square> ^neighbors
+         (<neighbors>
+             ^north.neighbors.east <ne>))
+-->
+   (<neighbors> ^ne <ne>)
+}
+sp {elaborate*board*neighbors*se
+   (state <s> ^board.square <square> <se>)
+   (<square> ^neighbors
+         (<neighbors>
+             ^south.neighbors.east <se>))
+-->
+   (<neighbors> ^se <se>)
+}
+sp {elaborate*board*neighbors*sw
+   (state <s> ^board.square <square> <sw>)
+   (<square> ^neighbors
+         (<neighbors>
+             ^south.neighbors.west <sw>))
+-->
+   (<neighbors> ^sw <sw>)
+}

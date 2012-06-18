@@ -1,0 +1,17 @@
+# elaborate if a square is a blue anchor square
+sp {elaborate*blue*anchor
+   (state <s> ^board <board>)
+   # match the square
+   (<board> ^square <anchor>)
+   # match the location of the square
+   (<anchor> ^x <x> ^y <y>)
+   # square is open
+   (<anchor> ^color none)
+   # no adjacent square is blue
+  -(<anchor> ^neighbors.<< north south east west >> (^color blue))
+   # at least one kitty corner square is blue
+   (<anchor> ^neighbors.<< nw ne sw se >> (^color blue))
+-->
+   (<anchor> ^anchor blue)
+}
+      

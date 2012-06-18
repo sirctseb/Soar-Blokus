@@ -1,0 +1,75 @@
+
+# elaborate squares if their sides are edges of the block
+sp {north*edge
+   (state <s> ^hand.block.orientation <o>)
+   (<o> ^square (<edge> ^x <x> ^y <y>))
+   (<s> ^north (^from <y> ^to <new-y>))
+  -(<o> ^square (^x <x> ^y <new-y>))
+-->
+   (<edge> ^edge north)
+}
+sp {east*edge
+   (state <s> ^hand.block.orientation <o>)
+   (<o> ^square (<edge> ^x <x> ^y <y>))
+   (<s> ^east (^from <x> ^to <new-x>))
+  -(<o> ^square (^x <new-x> ^y <y>))
+-->
+   (<edge> ^edge east)
+}
+sp {south*edge
+   (state <s> ^hand.block.orientation <o>)
+   (<o> ^square (<edge> ^x <x> ^y <y>))
+   (<s> ^north (^from <new-y> ^to <y>))
+  -(<o> ^square (^x <x> ^y <new-y>))
+-->
+   (<edge> ^edge south)
+}
+sp {west*edge
+   (state <s> ^hand.block.orientation <o>)
+   (<o> ^square (<edge> ^x <x> ^y <y>))
+   (<s> ^east (^from <new-x> ^to <x>))
+  -(<o> ^square (^x <new-x> ^y <y>))
+-->
+   (<edge> ^edge west)
+}
+# elaborate squares if their corners are convex corners of the block
+sp {northwest*corner
+   (state <s> ^hand.block.orientation.square(<corner> ^edge north west))
+-->
+   (<corner> ^corner nw)
+}
+sp {northeast*corner
+   (state <s> ^hand.block.orientation.square(<corner> ^edge north east))
+-->
+   (<corner> ^corner ne)
+}
+sp {southeast*corner
+   (state <s> ^hand.block.orientation.square(<corner> ^edge south east))
+-->
+   (<corner> ^corner se)
+}
+sp {southwest*corner
+   (state <s> ^hand.block.orientation.square(<corner> ^edge south west))
+-->
+   (<corner> ^corner sw)
+}
+
+# create dir structure on state
+sp {create*dir*structure
+   (state <s> ^superstate nil)
+-->
+   (<s> ^dir <dir>)
+}
+gp {reference*dirs
+   (state <s> ^superstate nil
+              ^dir <dir>)
+-->
+   (<dir> ^[north east] <step>)
+   (<step> ^from [-3 -2 -1 0 1 2 3 4])
+}
+sp {elaborate*vectors
+   (state <s> ^superstate nil
+              ^dir.<< north east >> (<dir> ^from <from>))
+-->
+   (<dir> ^to (+ 1 <from>))
+}
