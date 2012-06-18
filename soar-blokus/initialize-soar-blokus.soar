@@ -1,20 +1,10 @@
 sp {propose*initialize-soar-blokus
    (state <s> ^superstate nil
-#             -^name)
-#             -^board.square (^x 19 ^y 19))
              -^init done)
 -->
    (<s> ^operator <o> +)
    (<o> ^name initialize-soar-blokus)
 }
-
-#sp {apply*initialize-soar-blokus
-#   (state <s> ^operator <op>)
-#   (<op> ^name initialize-soar-blokus)
-#-->
-#   (<s> ^name soar-blokus)
-#   (<s> ^board <board>)
-#}
 
 sp {propose*construct-board
    (state <s> ^name initialize-soar-blokus)
