@@ -210,6 +210,7 @@ sp {elaborate*copy*and*transform*square*reflection
    (<reflection> ^square <rsq>)
    (<rsq> ^x (- 0 <x>) ^y <y>)
 }
+# elaborate squares if their sides are edges of the block
 sp {north*edge
    (state <s> ^hand.block.orientation <o>)
    (<o> ^square (<edge> ^x <x> ^y <y>))
@@ -217,6 +218,22 @@ sp {north*edge
   -(<o> ^square (^x <x> ^y <new-y>))
 -->
    (<edge> ^edge n)
+}
+sp {east*edge
+   (state <s> ^hand.block.orientation <o>)
+   (<o> ^square (<edge> ^x <x> ^y <y>))
+   (<s> ^east (^from <x> ^to <new-x>))
+  -(<o> ^square (^x <new-x> ^y <y>))
+-->
+   (<edge> ^edge e)
+}
+sp {south*edge
+   (state <s> ^hand.block.orientation <o>)
+   (<o> ^square (<edge> ^x <x> ^y <y>))
+   (<s> ^north (^from <new-y> ^to <y>))
+  -(<o> ^square (^x <x> ^y <new-y>))
+-->
+   (<edge> ^edge s)
 }
 sp {west*edge
    (state <s> ^hand.block.orientation <o>)
@@ -226,30 +243,27 @@ sp {west*edge
 -->
    (<edge> ^edge w)
 }
+# elaborate squares if their corners are convex corners of the block
 sp {northwest*corner
    (state <s> ^hand.block.orientation.square(<corner> ^edge n w))
 -->
    (<corner> ^corner nw)
 }
-# elaborate squares with their attachment corners
-#sp {elaborate*square*attachment*corners*nw
-#   (state <s> ^hand.block.orientation <O>)
-#   (<O> ^square (<corner> ^north.x <nx> ^north.y <ny> ^west.x <wx> ^west.y <wy>))
-#  -(<O> ^square (^x <nx> ^y <ny>))
-#  -(<O> ^square (^x <wx> ^y <wy>))
-#-->
-#   (<corner> ^corner nw-old)
-#}
-#sp {cardinal*directions
-#   (state <s1> ^hand.block.orientation <O>)
-#   (<O> ^square (<square> ^x <x> ^y <y>))
-#-->
-#   (<square> ^north <n> ^south <s> ^east <e> ^west <w>)
-#   (<n> ^x <x> ^y (+ <y> 1))
-#   (<s> ^x <x> ^y (- <y> 1))
-#   (<e> ^x (+ <x> 1) ^y <y>)
-#   (<w> ^x (- <x> 1) ^y <y>)
-#}
+sp {northeast*corner
+   (state <s> ^hand.block.orientation.square(<corner> ^edge n e))
+-->
+   (<corner> ^corner ne)
+}
+sp {southeast*corner
+   (state <s> ^hand.block.orientation.square(<corner> ^edge s e))
+-->
+   (<corner> ^corner se)
+}
+sp {southwest*corner
+   (state <s> ^hand.block.orientation.square(<corner> ^edge s w))
+-->
+   (<corner> ^corner sw)
+}
 
 gp {reference*dirs
    (state <s> ^superstate nil)
@@ -263,12 +277,6 @@ sp {elaborate*vectors
 -->
    (<dir> ^to (+ 1 <from>))
 }
-
-
-# TODO corner elaborations
-# copy adjusted corners to transformed squares
-#sp {elaborate*
-
 
 # elaborate that we are done initializing
 sp {elaborate*init*done
