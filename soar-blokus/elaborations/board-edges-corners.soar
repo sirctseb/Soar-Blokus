@@ -3,25 +3,15 @@ sp {elaborate*anchor
    (state <s> ^board <board>)
    # match the square
    (<board> ^square <square>)
-   # square is open
-   (<square> ^color none)
-   # at least one kitty corner square is a color
+   # square is placeable for a color
+   (<square> ^placeable <color>)
+   # at least one kitty corner square is the color
    (<square> ^neighbors.{<dir> << nw ne sw se >>}  (^color <color>))
-   # no adjacent square is that color
-  -(<square> ^neighbors.<< north south east west >> (^color <color>))
 -->
    (<square> ^anchor <anchor>)
    (<anchor> ^color <color> ^dir <dir>)
 }
 
-# elaborate if a block of a color can not be placed to cover this square
-sp {elaborate*unplaceable*adjacent
-   # match the square
-   (state <s> ^board.square <unplaceable>)
-   (<unplaceable> ^neighbors.<< north south east west >>.color {<> none <color>})
--->
-   (<unplaceable> ^unplaceable <color>)
-}
 # elaborate if a block could be placed to cover this square
 sp {elaborate*placeable
    (state <s> ^board <board> ^color <color>)
