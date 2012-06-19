@@ -9,7 +9,7 @@ sp {elaborate*make*blue*square
 }
 # make one square yellow
 sp {elaborate*make*yellow*square
-   (state <s> ^board.square (<square> ^x 2 ^y 0))
+   (state <s> ^disable yes ^board.square (<square> ^x 2 ^y 0))
 -->
    (<square> ^color none -
              ^color yellow)
