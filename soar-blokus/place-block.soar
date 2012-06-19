@@ -51,6 +51,12 @@ sp {elaborate*place-block*positions
 }
    
 # reject place-blocks if they're not possible
-#sp {preference*reject*place-block
-#   (state <s> ^name soar-blokus
-#              ^operator <
+sp {preference*reject*place-block
+   (state <s> ^name soar-blokus
+              ^operator <o> +)
+   (<o> ^name place-block
+        ^placement.square(^x <x> ^y <y>))
+   -(<s> ^board.square(^x <x> ^y <y> ^placeable blue))
+-->
+   (<s> ^operator <o> -)
+}
