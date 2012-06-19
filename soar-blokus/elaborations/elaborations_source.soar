@@ -1,4 +1,5 @@
 source _all.soar
+source anchor-tests.soar
 source board-edges-corners.soar
 source board-neighbors.soar
 source hand-edges-corners.soar
