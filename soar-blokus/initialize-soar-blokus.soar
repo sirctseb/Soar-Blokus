@@ -34,6 +34,14 @@ gp {apply*construct-board*create*square
              ^color none)
 }
 
+# TODO testing anchors
+# make one square blue
+sp {elaborate*make*blue*square
+   (state <s> ^board.square (<square> ^x 0 ^y 0))
+-->
+   (<square> ^color none -
+              ^color blue)
+}
 # propose to construct the hand
 sp {propose*construct-hand
    (state <s> ^name initialize-soar-blokus
