@@ -6,14 +6,6 @@ sp {propose*initialize-soar-blokus
    (<o> ^name initialize-soar-blokus)
 }
 
-# name top state
-sp {name*soar-blokus
-   (state <s> ^superstate nil
-              ^operator.name initialize-soar-blokus)
--->
-   (<s> ^name soar-blokus)
-}
-
 sp {propose*construct-board
    (state <s> ^name initialize-soar-blokus)
 -->
@@ -26,8 +18,9 @@ sp {apply*construct-board*create*board
               ^operator.name construct-board
               ^top-state <ts>)
 -->
-   (<ts> ^board <b>   # create root board structure
-         ^name scope) # also add name
+   # create root board structure and add name
+   (<ts> ^board <b>
+         ^name soar-blokus)
 }
 # add the 400 squares on the board and indicate that they have no color
 gp {apply*construct-board*create*square
@@ -47,8 +40,7 @@ sp {propose*construct-hand
    (state <s> ^name initialize-soar-blokus
               ^top-state <ts>)
    # wait until the board is created
-   # actually the hand doesn't depend on the board,
-   # but this way we can enforce that we know the last thing in init
+   # actually the hand doesn't depend on the board, but this way we can enforce that we know the last thing in init
    (<ts> ^board.square(^x 19 ^y 19))
 -->
    (<s> ^operator <o> + >)
