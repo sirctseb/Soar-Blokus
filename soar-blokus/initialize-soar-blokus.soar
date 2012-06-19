@@ -49,6 +49,17 @@ sp {elaborate*make*yellow*square
    (<square> ^color none -
              ^color yellow)
 }
+# make two green squares
+sp {elaborate*make*green*squares
+   (state <s> ^board.square <sq1> <sq2>)
+   (<sq1> ^x 0 ^y 2)
+   (<sq2> ^x 1 ^y 2)
+-->
+   (<sq1> ^color none -
+          ^color green)
+   (<sq2> ^color none -
+          ^color green)
+}
 # propose to construct the hand
 sp {propose*construct-hand
    (state <s> ^name initialize-soar-blokus
