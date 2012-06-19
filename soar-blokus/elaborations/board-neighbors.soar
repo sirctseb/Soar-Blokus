@@ -20,7 +20,7 @@ sp {elaborate*board*neighbors*north
    (<neighbors> ^north <north>)
 }
 sp {elaborate*board*neighbors*south
-   (state <s> ^board.square <square> <north>)
+   (state <s> ^board.square <square>)
    (<square> ^neighbors.north.neighbors <neighbors>)
 -->
    (<neighbors> ^south <square>)
@@ -37,7 +37,7 @@ sp {elaborate*board*neighbors*east
    (<neighbors> ^east <east>)
 }
 sp {elaborate*board*neighbors*west
-   (state <s> ^board.square <square> <east>)
+   (state <s> ^board.square <square>)
    (<square> ^neighbors.east.neighbors <neighbors>)
 -->
    (<neighbors> ^west <square>)
