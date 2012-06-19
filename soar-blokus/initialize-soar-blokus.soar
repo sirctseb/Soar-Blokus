@@ -2,7 +2,7 @@ sp {propose*initialize-soar-blokus
    (state <s> ^superstate nil
              -^init done)
 -->
-   (<s> ^operator <o> +)
+   (<s> ^operator <o> + >)
    (<o> ^name initialize-soar-blokus)
 }
 
@@ -211,9 +211,10 @@ sp {elaborate*copy*and*transform*square*reflection
    (<rsq> ^x (- 0 <x>) ^y <y>)
 }
 
-# elaborate that we are done initializing
-sp {elaborate*init*done
+# apply that we are done initializing
+sp {apply*init*done
    (state <s> ^name initialize-soar-blokus
+              ^operator.name construct-hand
               ^top-state <ts>)
    # check for whatever the last thing done is
    (<ts> ^hand.block <block>)
