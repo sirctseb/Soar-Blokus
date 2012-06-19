@@ -6,6 +6,14 @@ sp {propose*initialize-soar-blokus
    (<o> ^name initialize-soar-blokus)
 }
 
+# name top state
+sp {name*soar-blokus
+   (state <s> ^superstate nil
+              ^operator.name initialize-soar-blokus)
+-->
+   (<s> ^name soar-blokus)
+}
+
 sp {propose*construct-board
    (state <s> ^name initialize-soar-blokus)
 -->
@@ -213,7 +221,7 @@ sp {elaborate*copy*and*transform*square*reflection
 
 # elaborate that we are done initializing
 sp {elaborate*init*done
-   (state <s> ^disable yes ^name initialize-soar-blokus
+   (state <s> ^name initialize-soar-blokus
               ^top-state <ts>)
    # check for whatever the last thing done is
    (<ts> ^hand.block <block>)
