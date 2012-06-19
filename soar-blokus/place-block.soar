@@ -1,0 +1,56 @@
+# propose to place a blue block
+sp {propose*place-block
+   (state <s> ^name soar-blokus)
+   # match anchor square and direction
+   (<s> ^board.square <square>)
+   (<square> ^anchor <anchor>)
+   (<anchor> ^color blue ^dir <dir>)
+   # match block in hand with
+   # orientation that has a square
+   # that has a matching corner
+   (<s> ^hand.block <block>)
+   (<block> ^orientation <or>)
+   (<or> ^square <block-square>)
+   (<block-square> ^corner <dir>)
+-->
+   # propose the operator
+   (<s> ^operator <o> +)
+   (<o> ^name place-block
+        ^block <block>
+        ^orientation <or>
+        ^anchor-square <square>
+        ^block-square <block-square>)
+}
+# elaborate place-blocks with placement structure
+sp {elaborate*place-block*placement
+   (state <s> ^name soar-blokus
+              ^operator <o> +)
+   (<o> ^name place-block)
+-->
+   (<o> ^placement <placement>)
+}
+# elaborate place-blocks with the actual
+# positions of the block
+sp {elaborate*place-block*positions
+   (state <s> ^name soar-blokus
+              ^operator <o> +)
+   (<o> ^name place-block
+        ^block <block>
+        ^orientation <or>
+        ^anchor-square <anchor>
+        ^block-square <block-square>)
+   (<anchor> ^x <anchor-x> ^y <anchor-y>)
+   (<block-square> ^x <block-x> ^y <block-y>)
+   (<or> ^square (<orig-square> ^x <square-x> ^y <square-y>))
+   (<o> ^placement <placement>)
+-->
+   (<placement> ^square <placed-square>)
+   (<placed-square> ^x (+ <anchor-x> (- <square-x> <block-x>))
+                    ^y (+ <anchor-y> (- <square-y> <block-y>))
+                    ^original <orig-square>)
+}
+   
+# reject place-blocks if they're not possible
+#sp {preference*reject*place-block
+#   (state <s> ^name soar-blokus
+#              ^operator <

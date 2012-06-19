@@ -6,3 +6,4 @@ pushd elaborations
 source elaborations_source.soar
 popd
 source initialize-soar-blokus.soar
+source place-block.soar

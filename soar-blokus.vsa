@@ -11,4 +11,5 @@ VERSION 4
 8	3	FOPERATOR hand-edges-corners hand-edges-corners.soar 8
 9	3	FOPERATOR top-state top-state.soar 9
 10	0	OPERATOR initialize-soar-blokus initialize-soar-blokus.soar 10
+11	0	OPERATOR place-block place-block.soar 12
 END
