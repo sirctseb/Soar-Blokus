@@ -3,7 +3,7 @@
 sp {north*edge
    (state <s> ^hand.block.orientation <o>)
    (<o> ^square (<edge> ^x <x> ^y <y>))
-   (<s> ^north (^from <y> ^to <new-y>))
+   (<s> ^dir.north (^from <y> ^to <new-y>))
   -(<o> ^square (^x <x> ^y <new-y>))
 -->
    (<edge> ^edge north)
@@ -11,7 +11,7 @@ sp {north*edge
 sp {east*edge
    (state <s> ^hand.block.orientation <o>)
    (<o> ^square (<edge> ^x <x> ^y <y>))
-   (<s> ^east (^from <x> ^to <new-x>))
+   (<s> ^dir.east (^from <x> ^to <new-x>))
   -(<o> ^square (^x <new-x> ^y <y>))
 -->
    (<edge> ^edge east)
@@ -19,7 +19,7 @@ sp {east*edge
 sp {south*edge
    (state <s> ^hand.block.orientation <o>)
    (<o> ^square (<edge> ^x <x> ^y <y>))
-   (<s> ^north (^from <new-y> ^to <y>))
+   (<s> ^dir.north (^from <new-y> ^to <y>))
   -(<o> ^square (^x <x> ^y <new-y>))
 -->
    (<edge> ^edge south)
@@ -27,7 +27,7 @@ sp {south*edge
 sp {west*edge
    (state <s> ^hand.block.orientation <o>)
    (<o> ^square (<edge> ^x <x> ^y <y>))
-   (<s> ^east (^from <new-x> ^to <x>))
+   (<s> ^dir.east (^from <new-x> ^to <x>))
   -(<o> ^square (^x <new-x> ^y <y>))
 -->
    (<edge> ^edge west)
