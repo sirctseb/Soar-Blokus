@@ -16,11 +16,19 @@ namespace SoarBlokus
 			for (int i = 0; i < 20; i++)
 			{
 				squares[i] = new Square[20];
+				for (int j = 0; j < 20; j++)
+				{
+					squares[i][j] = new Square();
+				}
 			}
+			squares[2][2].color = BlokusColor.Blue;
 		}
 	}
 	public class Square
 	{
 		public BlokusColor color = BlokusColor.None;
+		public Square()
+		{
+		}
 	}
 }
