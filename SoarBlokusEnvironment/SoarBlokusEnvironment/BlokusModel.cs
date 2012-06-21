@@ -16,6 +16,6 @@ namespace SoarBlokus
 
 	public class BlokusModel
 	{
-
+		public BoardModel boardModel = new BoardModel();
 	}
 }
