@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SoarBlokus
 {
-	enum BlokusColor
+	public enum BlokusColor
 	{
 		Blue,
 		Yellow,

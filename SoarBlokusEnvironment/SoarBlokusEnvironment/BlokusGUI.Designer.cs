@@ -40,6 +40,7 @@
 			this.boardView.Size = new System.Drawing.Size(511, 411);
 			this.boardView.TabIndex = 0;
 			this.boardView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.boardView_CellContentClick);
+			this.boardView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.boardView_CellFormatting);
 			// 
 			// BlokusGUI
 			// 
