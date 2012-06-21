@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace SoarBlokus
 {
-	public partial class Form1 : Form
+	public partial class BlokusGUI : Form
 	{
-		public Form1()
+		public BlokusGUI()
 		{
 			InitializeComponent();
 		}

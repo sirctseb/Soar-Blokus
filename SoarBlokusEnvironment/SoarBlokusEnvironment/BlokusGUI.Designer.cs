@@ -1,6 +1,6 @@
 ﻿namespace SoarBlokus
 {
-	partial class Form1
+	partial class BlokusGUI
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -30,12 +30,12 @@
 		{
 			this.SuspendLayout();
 			// 
-			// Form1
+			// BlokusGUI
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(607, 480);
-			this.Name = "Form1";
+			this.Name = "BlokusGUI";
 			this.Text = "Form1";
 			this.ResumeLayout(false);
 
