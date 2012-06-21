@@ -15,5 +15,11 @@ namespace SoarBlokus
 		{
 			InitializeComponent();
 		}
+
+		private void boardView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+		{
+			// TODO cycle color of square on click
+
+		}
 	}
 }

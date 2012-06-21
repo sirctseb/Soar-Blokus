@@ -28,20 +28,35 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.boardView = new System.Windows.Forms.DataGridView();
+			((System.ComponentModel.ISupportInitialize)(this.boardView)).BeginInit();
 			this.SuspendLayout();
+			// 
+			// boardView
+			// 
+			this.boardView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.boardView.Location = new System.Drawing.Point(40, 30);
+			this.boardView.Name = "boardView";
+			this.boardView.Size = new System.Drawing.Size(511, 411);
+			this.boardView.TabIndex = 0;
+			this.boardView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.boardView_CellContentClick);
 			// 
 			// BlokusGUI
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(607, 480);
+			this.Controls.Add(this.boardView);
 			this.Name = "BlokusGUI";
 			this.Text = "Form1";
+			((System.ComponentModel.ISupportInitialize)(this.boardView)).EndInit();
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
+
+		private System.Windows.Forms.DataGridView boardView;
 	}
 }
 
