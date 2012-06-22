@@ -26,9 +26,10 @@ namespace SoarBlokus
 			boardView.ColumnCount = 20;
 			for (int i = 0; i < 20; i++)
 			{
-				//boardView.Columns.Add(new DataGridViewColumn();
 				boardView.Rows.Add(model.boardModel.GetRow(i));
 			}
+			boardView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+			boardView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
 		}
 
 		private void boardView_CellContentClick(object sender, DataGridViewCellEventArgs e)
