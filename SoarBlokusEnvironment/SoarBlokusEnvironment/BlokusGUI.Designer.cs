@@ -47,6 +47,7 @@
 			this.boardView.TabIndex = 0;
 			this.boardView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.boardView_CellContentClick);
 			this.boardView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.boardView_CellFormatting);
+			this.boardView.SelectionChanged += new System.EventHandler(this.boardView_SelectionChanged);
 			// 
 			// startKernelButton
 			// 

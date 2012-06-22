@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using SMLExtension;
 
 namespace SoarBlokus
 {
@@ -75,14 +76,51 @@ namespace SoarBlokus
 
 		private void startKernelButton_Click(object sender, EventArgs e)
 		{
-			// TODO initialize kernel
+			// create kernel
+			kernel = sml.Kernel.CreateKernelInNewThread();
+
+			// TODO handle error
+			if (kernel.HadError())
+			{
+				return;
+			}
+
+			// create agent
+			agent = kernel.CreateAgent("blue");
+			if (agent.HadError())
+			{
+				return;
+			}
+			// load rules
+			agent.LoadProductions(@"..\..\..\..\soar-blokus.soar");
 		}
 
 		private void runAgentButton_Click(object sender, EventArgs e)
 		{
+			// clear input-link
+			foreach (sml.WMElement element in agent.GetInputLink().GetChildren())
+			{
+				element.DestroyWME();
+			}
 			// TODO put stuff on input-link
+			foreach (var entry in changes)
+			{
+				// create an ID on input link
+				sml.Identifier squareID = agent.GetInputLink().CreateIdWME("square");
+				// add x, y, and color
+				squareID.CreateIntWME("x", entry.Key.Item2);
+				squareID.CreateIntWME("y", 19 - entry.Key.Item1);
+				squareID.CreateStringWME("color", entry.Value.ToString().ToLower());
+			}
+			// clear color changes
+			changes.Clear();
 			// TODO run agent
 			// TODO get stuff from output-link
+		}
+
+		private void boardView_SelectionChanged(object sender, EventArgs e)
+		{
+			boardView.ClearSelection();
 		}
 	}
 }
