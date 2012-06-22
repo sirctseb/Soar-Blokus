@@ -9,7 +9,13 @@ namespace SoarBlokus
 	public class BoardModel
 	{
 		// The array of squares
-		public Square [][] squares = new Square [20][];
+		// squares[y][x] or squares[row][col]
+		private Square [][] squares = new Square [20][];
+
+		public Square[] GetRow(int row)
+		{
+			return squares[19 - row];
+		}
 
 		public BoardModel()
 		{

@@ -27,7 +27,7 @@ namespace SoarBlokus
 			for (int i = 0; i < 20; i++)
 			{
 				//boardView.Columns.Add(new DataGridViewColumn();
-				boardView.Rows.Add(model.boardModel.squares[i]);
+				boardView.Rows.Add(model.boardModel.GetRow(i));
 			}
 		}
 
