@@ -2,7 +2,7 @@
 # TODO testing anchors
 # make one square blue
 sp {elaborate*make*blue*square
-   (state <s> ^board.square (<square> ^x 0 ^y 0))
+   (state <s> ^disable yes ^board.square (<square> ^x 0 ^y 0))
 -->
    (<square> ^color none -
               ^color blue)
@@ -16,7 +16,7 @@ sp {elaborate*make*yellow*square
 }
 # make two green squares
 sp {elaborate*make*green*squares
-   (state <s> ^board.square <sq1> <sq2>)
+   (state <s> ^disable yes ^board.square <sq1> <sq2>)
    (<sq1> ^x 0 ^y 2)
    (<sq2> ^x 1 ^y 2)
 -->

@@ -97,11 +97,6 @@ namespace SoarBlokus
 
 		private void runAgentButton_Click(object sender, EventArgs e)
 		{
-			// clear input-link
-			foreach (sml.WMElement element in agent.GetInputLink().GetChildren())
-			{
-				element.DestroyWME();
-			}
 			// TODO put stuff on input-link
 			foreach (var entry in changes)
 			{
@@ -115,6 +110,8 @@ namespace SoarBlokus
 			// clear color changes
 			changes.Clear();
 			// TODO run agent
+			agent.RunSelf(1);
+			
 			// TODO get stuff from output-link
 		}
 

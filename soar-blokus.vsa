@@ -12,4 +12,5 @@ VERSION 4
 9	3	FOPERATOR top-state top-state.soar 10
 10	0	OPERATOR initialize-soar-blokus initialize-soar-blokus.soar 11
 11	0	OPERATOR place-block place-block.soar 12
+12	0	OPERATOR read-board read-board.soar 13
 END

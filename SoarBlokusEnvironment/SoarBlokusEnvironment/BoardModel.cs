@@ -27,7 +27,7 @@ namespace SoarBlokus
 					squares[i][j] = new Square();
 				}
 			}
-			squares[4][2].color = BlokusColor.Blue;
+			//squares[4][2].color = BlokusColor.Blue;
 		}
 	}
 	public class Square

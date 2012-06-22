@@ -1,0 +1,37 @@
+# propose to read input about the colors on the board
+sp {propose*read-board
+   (state <s> ^name soar-blokus
+              ^io.input-link <input>)
+   (<input> ^square <square>)
+-->
+   (<s> ^operator <o> + >)
+   (<o> ^name read-board
+        ^square <square>)
+}
+
+# make read-boards equal
+sp {preference*read-board*indifferent
+   (state <s> ^name soar-blokus
+              ^operator <o1> +
+              ^operator <o2> +)
+   (<o1> ^name read-board)
+   (<o2> ^name read-board)
+-->
+   (<s> ^operator <o1> = <o2>)
+}
+
+# apply read-board operator
+sp {apply*read-board
+   (state <s> ^name soar-blokus
+              ^operator <o>
+              ^io.input-link <input>)
+   (<o> ^name read-board
+        ^square (<in-square> ^x <x> ^y <y> ^color <color>))
+   (<s> ^board.square (<square> ^x <x> ^y <y> ^color <old-color>))
+-->
+   # change the color on the board square
+   (<square> ^color <old-color> -
+             ^color <color>)
+   # remove input wme
+   (<input> ^square <in-square> -)
+}
