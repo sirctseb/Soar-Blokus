@@ -3,6 +3,8 @@ sp {propose*read-board
    (state <s> ^name soar-blokus
               ^io.input-link <input>)
    (<input> ^square <square>)
+   # test that we haven't processed this square already
+   (<square> -^ack yes)
 -->
    (<s> ^operator <o> + >)
    (<o> ^name read-board
@@ -32,6 +34,6 @@ sp {apply*read-board
    # change the color on the board square
    (<square> ^color <old-color> -
              ^color <color>)
-   # remove input wme
-   (<input> ^square <in-square> -)
+   # acknowledge input
+   (<in-square> ^ack yes)
 }
