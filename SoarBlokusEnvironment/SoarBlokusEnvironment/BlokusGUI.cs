@@ -93,11 +93,15 @@ namespace SoarBlokus
 			}
 			// load rules
 			agent.LoadProductions(@"..\..\..\..\soar-blokus.soar");
+
+			// register for output
+			kernel.RegisterForUpdateEvent(sml.smlUpdateEventId.smlEVENT_AFTER_ALL_OUTPUT_PHASES, HandleAgentOuput, null);
 		}
 
 		private void runAgentButton_Click(object sender, EventArgs e)
 		{
 			// TODO put stuff on input-link
+			// TODO this should also be in output handler
 			foreach (var entry in changes)
 			{
 				// create an ID on input link
@@ -111,8 +115,11 @@ namespace SoarBlokus
 			changes.Clear();
 			// TODO run agent
 			agent.RunSelf(1);
-			
-			// TODO get stuff from output-link
+		}
+		//public delegate void UpdateEventCallback(smlUpdateEventId eventID, IntPtr callbackData, IntPtr kernel, smlRunFlags runFlags);
+		public void HandleAgentOuput(sml.smlUpdateEventId eventID, IntPtr data, IntPtr kernel, sml.smlRunFlags runFlags)
+		{
+			// get stuff from output-link
 			sml.Identifier moveCommand = agent.GetCommand("move");
 			if (moveCommand != null)
 			{
@@ -130,13 +137,16 @@ namespace SoarBlokus
 						// color square in board view
 						((Square)boardView[x, 19 - y].Value).color = BlokusColor.Blue;
 						boardView.InvalidateCell(x, 19 - y);
+
+						// put change in change list to send back to agent
+						changes[Tuple.Create(x, 19 - y)] = BlokusColor.Blue;
 					}
 
-
-					// mark command as complete
-					moveCommand.AddStatusComplete();
 					// clear output changes
 					agent.ClearOutputLinkChanges();
+					// mark command as complete
+					moveCommand.AddStatusComplete();
+					agent.Commit();
 				}
 				else
 				{
