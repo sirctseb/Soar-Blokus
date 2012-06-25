@@ -19,8 +19,7 @@ sp {apply*construct-board*create*board
               ^top-state <ts>)
 -->
    # create root board structure and add name
-   (<ts> ^board <b>
-         ^name soar-blokus)
+   (<ts> ^board <b>)
 }
 # add the 400 squares on the board and indicate that they have no color
 gp {apply*construct-board*create*square
@@ -221,5 +220,6 @@ sp {apply*init*done
    (<block> ^name l5 ^orientation.square <sq>)
    (<sq> ^x 4 ^y 0 ^corner ne se)
 -->
-   (<ts> ^init done)
+   (<ts> ^init done
+         ^name soar-blokus)
 }
