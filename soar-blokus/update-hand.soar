@@ -1,0 +1,32 @@
+# propose to update the hand when we get a ^status complete on a move command
+sp {propose*update-hand
+   (state <s> ^name soar-blokus
+              ^io.output-link.move <move>)
+   (<move> ^status complete)
+-->
+   (<s> ^operator <o> + >)
+   (<o> ^name update-hand
+        ^move <move>)
+}
+
+# move block out of usable hand
+sp {apply*update-hand
+   (state <s> ^name soar-blokus
+              ^operator <o>
+              ^hand.block <block>)
+   (<o> ^name update-hand
+        ^move.block <block>)
+-->
+   (<block> ^used yes)
+}
+
+# remove command from output
+sp {apply*update-hand*remove*command
+   (state <s> ^name soar-blokus
+              ^operator <o>
+              ^io.output-link(<out> ^move <move>))
+   (<move> ^status complete)
+   (<o> ^name update-hand)
+-->
+   (<out> ^move <move> -)
+}

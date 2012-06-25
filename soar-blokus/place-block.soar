@@ -9,7 +9,8 @@ sp {propose*place-block
    # orientation that has a square
    # that has a matching corner
    (<s> ^hand.block <block>)
-   (<block> ^orientation <or>)
+   (<block> ^orientation <or>
+           -^used yes)
    (<or> ^square <block-square>)
    (<block-square> ^corner <dir>)
 -->
@@ -67,9 +68,11 @@ sp {apply*place-block
               ^operator <o>
               ^io.output-link <output>)
    (<o> ^name place-block
-        ^placement <placement>)
+        ^placement <placement>
+        ^block <block>)
 -->
    (<output> ^move <move>)
-   (<move> ^placement <placement>)
+   (<move> ^placement <placement>
+           ^block <block>)
    (write (crlf) |Putting move command on output link|)
 }

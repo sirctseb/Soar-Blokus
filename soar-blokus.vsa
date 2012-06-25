@@ -13,4 +13,5 @@ VERSION 4
 10	0	OPERATOR initialize-soar-blokus initialize-soar-blokus.soar 11
 11	0	OPERATOR place-block place-block.soar 12
 12	0	OPERATOR read-board read-board.soar 13
+13	0	OPERATOR update-hand update-hand.soar 14
 END
