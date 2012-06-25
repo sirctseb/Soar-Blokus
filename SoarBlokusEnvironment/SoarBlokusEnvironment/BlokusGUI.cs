@@ -103,8 +103,8 @@ namespace SoarBlokus
 				// create an ID on input link
 				sml.Identifier squareID = agent.GetInputLink().CreateIdWME("square");
 				// add x, y, and color
-				squareID.CreateIntWME("x", entry.Key.Item2);
-				squareID.CreateIntWME("y", 19 - entry.Key.Item1);
+				squareID.CreateIntWME("x", entry.Key.Item1);
+				squareID.CreateIntWME("y", 19 - entry.Key.Item2);
 				squareID.CreateStringWME("color", entry.Value.ToString().ToLower());
 			}
 			// clear color changes
@@ -113,6 +113,36 @@ namespace SoarBlokus
 			agent.RunSelf(1);
 			
 			// TODO get stuff from output-link
+			sml.Identifier moveCommand = agent.GetCommand("move");
+			if (moveCommand != null)
+			{
+				// get placement info
+				sml.Identifier placement = moveCommand.FindIDByAttribute("placement");
+				if (placement != null)
+				{
+					// iterate over squares
+					foreach (sml.Identifier squareID in placement.GetIDChildren("square"))
+					{
+						// get x,y from command
+						int x = (int)squareID.FindIntByAttribute("x");
+						int y = (int)squareID.FindIntByAttribute("y");
+
+						// color square in board view
+						((Square)boardView[x, 19 - y].Value).color = BlokusColor.Blue;
+					}
+
+					boardView.Update();
+
+					// mark command as complete
+					moveCommand.AddStatusComplete();
+					// clear output changes
+					agent.ClearOutputLinkChanges();
+				}
+				else
+				{
+					Console.WriteLine("Error getting placement info: placement attribute DNE");
+				}
+			}
 		}
 
 		private void boardView_SelectionChanged(object sender, EventArgs e)
