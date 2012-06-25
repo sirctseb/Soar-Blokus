@@ -129,9 +129,9 @@ namespace SoarBlokus
 
 						// color square in board view
 						((Square)boardView[x, 19 - y].Value).color = BlokusColor.Blue;
+						boardView.InvalidateCell(x, 19 - y);
 					}
 
-					boardView.Update();
 
 					// mark command as complete
 					moveCommand.AddStatusComplete();
