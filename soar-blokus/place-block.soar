@@ -14,7 +14,7 @@ sp {propose*place-block
    (<block-square> ^corner <dir>)
 -->
    # propose the operator
-   (<s> ^operator <o> +)
+   (<s> ^operator <o> + =)
    (<o> ^name place-block
         ^block <block>
         ^orientation <or>
@@ -59,4 +59,17 @@ sp {preference*reject*place-block
    -(<s> ^board.square(^x <x> ^y <y> ^placeable blue))
 -->
    (<s> ^operator <o> -)
+}
+
+# apply place-block by putting command on the output-link
+sp {apply*place-block
+   (state <s> ^name soar-blokus
+              ^operator <o>
+              ^io.output-link <output>)
+   (<o> ^name place-block
+        ^placement <placement>)
+-->
+   (<output> ^move <move>)
+   (<move> ^placement <placement>)
+   (write (crlf) |Putting move command on output link|)
 }
