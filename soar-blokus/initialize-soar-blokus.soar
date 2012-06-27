@@ -3,11 +3,17 @@ sp {propose*initialize-soar-blokus
              -^init done)
 -->
    (<s> ^operator <o> + >)
-   (<o> ^name initialize-soar-blokus)
+#   (<o> ^name initialize-soar-blokus)
+}
+sp {declare*top-state*name
+   (state <s> ^operator <o> +)
+   (<o> ^name end-init)
+-->
+   (<o> ^state-name soar-blokus)
 }
 
 sp {propose*construct-board
-   (state <s> ^name initialize-soar-blokus)
+   (state <s> ^name init)
 -->
    (<s> ^operator <o> +)
    (<o> ^name construct-board)

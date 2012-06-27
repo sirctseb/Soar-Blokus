@@ -1,4 +1,4 @@
-19
+21
 SOAR_ID 0
 SOAR_ID 1
 SOAR_ID 2
@@ -18,7 +18,9 @@ SOAR_ID 15
 ENUMERATION 16 1 read-board
 SOAR_ID 17
 ENUMERATION 18 1 update-hand
-19
+SOAR_ID 19
+ENUMERATION 20 1 init
+21
 0 io 1
 0 name 7
 0 operator 4
@@ -27,6 +29,7 @@ ENUMERATION 18 1 update-hand
 0 operator 13
 0 operator 15
 0 operator 17
+0 operator 19
 0 superstate 6
 0 top-state 0
 0 type 5
@@ -38,3 +41,4 @@ ENUMERATION 18 1 update-hand
 13 name 14
 15 name 16
 17 name 18
+19 name 20
