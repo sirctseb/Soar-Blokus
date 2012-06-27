@@ -1,5 +1,5 @@
 sp {propose*initialize-soar-blokus
-   (state <s> ^superstate nil
+   (state <s> ^disable yes ^superstate nil
              -^init done)
 -->
    (<s> ^operator <o> + >)
@@ -20,7 +20,7 @@ sp {propose*construct-board
 }
 
 sp {apply*construct-board*create*board
-   (state <s> ^name initialize-soar-blokus
+   (state <s> ^name init
               ^operator.name construct-board
               ^top-state <ts>)
 -->
@@ -29,7 +29,7 @@ sp {apply*construct-board*create*board
 }
 # add the 400 squares on the board and indicate that they have no color
 gp {apply*construct-board*create*square
-   (state <s> ^name initialize-soar-blokus
+   (state <s> ^name init
               ^operator.name construct-board
               ^top-state <ts>)
    (<ts> ^board <board>)
@@ -42,10 +42,11 @@ gp {apply*construct-board*create*square
 
 # propose to construct the hand
 sp {propose*construct-hand
-   (state <s> ^name initialize-soar-blokus
+   (state <s> ^name init
               ^top-state <ts>)
    # wait until the board is created
    # actually the hand doesn't depend on the board, but this way we can enforce that we know the last thing in init
+# TODO we can get rid of this now that we have init.soar
    (<ts> ^board.square(^x 19 ^y 19))
 -->
    (<s> ^operator <o> + >)
@@ -53,7 +54,7 @@ sp {propose*construct-hand
 }
 # construct the root hand structure
 sp {apply*construct-hand
-   (state <s> ^name initialize-soar-blokus
+   (state <s> ^name init
               ^top-state <ts>
               ^operator.name construct-hand)
 -->
@@ -62,7 +63,7 @@ sp {apply*construct-hand
 # names from http://www.c2strategy.wordpress.com/2011/04/10/piece-names/
 # construct block l5
 sp {apply*construct-hand*l5
-   (state <s> ^name initialize-soar-blokus
+   (state <s> ^name init
               ^top-state.hand <hand>
               ^operator.name construct-hand)
 -->
@@ -82,7 +83,7 @@ sp {apply*construct-hand*l5
 }
 # construct block O
 sp {apply*construct-hand*O
-   (state <s> ^name initialize-soar-blokus
+   (state <s> ^name init
               ^top-state.hand <hand>
               ^operator.name construct-hand)
 -->
@@ -101,7 +102,7 @@ sp {apply*construct-hand*O
 }
 # construct block Z4
 sp {apply*construct-hand*Z4
-   (state <s> ^name initialize-soar-blokus
+   (state <s> ^name init
               ^top-state.hand <hand>
               ^operator.name construct-hand)
 -->
@@ -121,7 +122,7 @@ sp {apply*construct-hand*Z4
 
 # construct block V3
 sp {apply*construct-hand*V3
-   (state <s> ^name initialize-soar-blokus
+   (state <s> ^name init
               ^top-state.hand <hand>
               ^operator.name construct-hand)
 -->
@@ -140,7 +141,7 @@ sp {apply*construct-hand*V3
 
 # construct block L4
 sp {apply*construct-hand*L4
-   (state <s> ^name initialize-soar-blokus
+   (state <s> ^name init
               ^top-state.hand <hand>
               ^operator.name construct-hand)
 -->
@@ -218,7 +219,7 @@ sp {elaborate*copy*and*transform*square*reflection
 
 # apply that we are done initializing
 sp {apply*init*done
-   (state <s> ^name initialize-soar-blokus
+   (state <s> ^disable yes ^name initialize-soar-blokus
               ^operator.name construct-hand
               ^top-state <ts>)
    # check for whatever the last thing done is
