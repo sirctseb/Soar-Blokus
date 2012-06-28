@@ -1,10 +1,3 @@
-sp {propose*initialize-soar-blokus
-   (state <s> ^disable yes ^superstate nil
-             -^init done)
--->
-   (<s> ^operator <o> + >)
-#   (<o> ^name initialize-soar-blokus)
-}
 sp {declare*top-state*name
    (state <s> ^operator <o> +)
    (<o> ^name end-init)
@@ -42,8 +35,7 @@ gp {apply*construct-board*create*square
 
 # propose to construct the hand
 sp {propose*construct-hand
-   (state <s> ^name init
-              ^top-state <ts>)
+   (state <s> ^name init)
    # wait until the board is created
    # actually the hand doesn't depend on the board, but this way we can enforce that we know the last thing in init
 # TODO we can get rid of this now that we have init.soar
