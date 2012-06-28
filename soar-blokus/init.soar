@@ -5,6 +5,8 @@
 # so that it only fires after there are no more initialization operators
 # the ending operator application adds a name to the top-state, which will retract the init subgoal
 
+# requires: ancestry.soar
+
 # how to use:
 # include this file
 # implement initialization operators which test (state <s> ^name init)
@@ -13,38 +15,50 @@
 # e.g.
 # # declare state name
 # sp {
-#  (state <s> ^operator <o> +)
-#  (<o> ^name end-init)
+#	(state <s> ^operator <o> +)
+#	(<o> ^name end-init)
 # -->
-#  (<o> ^state-name resulting-top-state-name)
+#	(<o> ^state-name resulting-top-state-name)
 # }
 
 # propose the init subgoal
 sp {propose*init
-  # propose when top state has no name
-  (state <s> ^superstate nil -^name)
+	# propose when top state has no name
+	(state <s> ^superstate nil -^name)
 -->
-  # require init operator
-  (<s> ^operator <o> + !)
-  (<o> ^name init)
+	# require init operator
+	(<s> ^operator <o> + !)
+	(<o> ^name init)
 }
 
-# propose to end the initialization procedure
-sp {propose*end-init
-  # propose only when we reach a state no-change impasse in init,
-  # meaning no other operators were proposed
-  (state <s> ^superstate (<ss> ^name init) ^attribute state ^choices none)
+# if we find a state no-change, propose a worst operator
+# which will eventually propose the actual end operator
+sp {propose*trigger-end-init
+	# propose in a state no-change
+	(state <s> ^ancestor (<anc> ^name init) ^attribute state ^choices none)
 -->
-  # propose the end-init operator on the init subgoal
-  (<ss> ^operator <o> +)
-  (<o> ^name end-init)
+	# propose worst trigger operator
+	(<s> ^operator <o> + <)
+	(<o> ^name trigger-end-init)
+}
+
+# TODO make trigger-end-init binary worse than anything else?
+
+# apply trigger-end-init
+sp {apply*trigger-end-init
+	(state <s> ^ancestor (<anc> ^name init)
+				^operator.name trigger-end-init)
+-->
+	# propose actual end-init operator
+	(<anc> ^operator <o> + !)
+	(<o> ^name end-init)
 }
 
 # apply end-init operator
 sp {apply*end-init
-  (state <s> ^name init ^operator <o> ^top-state <ts>)
-  (<o> ^state-name <state-name>
-       ^name end-init)
+	(state <s> ^name init ^operator <o> ^top-state <ts>)
+	(<o> ^state-name <state-name>
+		 ^name end-init)
 -->
-  (<ts> ^name <state-name>)
+	(<ts> ^name <state-name>)
 }

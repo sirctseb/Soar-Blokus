@@ -1,0 +1,16 @@
+# ancestry.soar
+# these rules elaborate states with their ancestors
+
+# base condition: superstate is an ancestor
+sp {ancestry*elaborate*superstate*as*ancestor
+   (state <s> ^superstate <ss>)
+-->
+   (<s> ^ancestor <ss>)
+}
+
+# recurse: ancestors of superstate are ancestors
+sp {ancestry*elaborate*superstate*ancestors*as*ancestors
+   (state <s> ^superstate.ancestor <ss-anc>)
+-->
+   (<s> ^ancestor <ss-anc>)
+}
