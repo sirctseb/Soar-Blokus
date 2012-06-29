@@ -1,0 +1,6 @@
+source construct-board.soar
+source construct-hand.soar
+source define-blocks.soar
+pushd define-blocks
+source define-blocks_source.soar
+popd

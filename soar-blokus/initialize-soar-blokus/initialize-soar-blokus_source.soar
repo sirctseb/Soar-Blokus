@@ -1,0 +1,4 @@
+source procedural-pattern.soar
+pushd procedural-pattern
+source procedural-pattern_source.soar
+popd

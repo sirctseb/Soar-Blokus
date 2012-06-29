@@ -1,0 +1,35 @@
+# elaborate init op with procedure name
+sp {elaborate*init*procedure
+   (state <s> ^operator <o> +)
+   (<o> ^name init)
+-->
+   (<o> ^procedure init-procedure)
+}
+
+# first op in sequence: construct the board
+sp {propose*construct-board
+   (state <s> ^name init)
+-->
+   (<s> ^operator <o> +)
+   (<o> ^name construct-board
+        ^sequence 1)
+}
+
+# second op in sequence: construct the block definitions
+# propose to define the blocks
+sp {propose*define-blocks
+   (state <s> ^name init)
+-->
+   (<s> ^operator <o> +)
+   (<o> ^name define-blocks
+        ^sequence 2)
+}
+
+# third op in sequence: construct the initial hand of blocks
+sp {propose*construct-hand
+   (state <s> ^name init)
+-->
+   (<s> ^operator <o> +)
+   (<o> ^name construct-hand
+        ^sequence 3)
+}

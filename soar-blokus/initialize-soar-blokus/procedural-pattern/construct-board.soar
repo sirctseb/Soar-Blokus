@@ -1,0 +1,21 @@
+# one application rule to create the base board structure
+sp {apply*construct-board*create*board
+   (state <s> ^name init
+              ^operator.name construct-board
+              ^top-state <ts>)
+-->
+   # create root board structure
+   (<ts> ^board <b>)
+}
+# add the 400 squares on the board and indicate that they have no color
+gp {apply*construct-board*create*square
+   (state <s> ^name init
+              ^operator.name construct-board
+              ^top-state <ts>)
+   (<ts> ^board <board>)
+-->
+   (<board> ^square <square>)
+   (<square> ^x [0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19]
+             ^y [0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19]
+             ^color none)
+}

@@ -1,4 +1,4 @@
-23
+40
 SOAR_ID 0
 SOAR_ID 1
 SOAR_ID 2
@@ -22,7 +22,24 @@ SOAR_ID 19
 ENUMERATION 20 1 init
 SOAR_ID 21
 ENUMERATION 22 1 ancestry
-23
+SOAR_ID 23
+ENUMERATION 24 1 state
+ENUMERATION 25 1 initialize-soar-blokus
+ENUMERATION 26 1 procedural-pattern
+SOAR_ID 27
+SOAR_ID 28
+ENUMERATION 29 1 state
+ENUMERATION 30 1 procedural-pattern
+ENUMERATION 31 1 define-blocks
+SOAR_ID 32
+SOAR_ID 33
+ENUMERATION 34 1 state
+ENUMERATION 35 1 define-blocks
+ENUMERATION 36 1 construct-board
+SOAR_ID 37
+ENUMERATION 38 1 construct-hand
+SOAR_ID 39
+43
 0 io 1
 0 name 7
 0 operator 4
@@ -46,3 +63,23 @@ ENUMERATION 22 1 ancestry
 17 name 18
 19 name 20
 21 name 22
+23 name 25
+23 operator 27
+23 superstate 0
+23 top-state 0
+23 type 24
+27 name 26
+28 name 30
+28 operator 32
+28 operator 37
+28 operator 39
+28 superstate 23
+28 top-state 0
+28 type 29
+32 name 31
+33 name 35
+33 superstate 28
+33 top-state 0
+33 type 34
+37 name 36
+39 name 38

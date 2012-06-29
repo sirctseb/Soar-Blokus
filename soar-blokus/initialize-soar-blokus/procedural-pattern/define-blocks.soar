@@ -1,0 +1,107 @@
+# construct the structure that will hold block definitions
+sp {apply*define-blocks
+   (state <s> ^name init
+              ^top-state <ts>
+              ^operator.name define-blocks)
+-->
+   (<ts> ^blocks <blocks>)
+}
+
+# names from http://www.c2strategy.wordpress.com/2011/04/10/piece-names/
+# construct block l5
+sp {apply*define-blocks*l5
+   (state <s> ^name init
+              ^top-state.blocks <blocks>
+              ^operator.name define-blocks)
+-->
+   # add the block
+   (<blocks> ^block <l5>)
+   # name it and create orientations
+   # TODO color?
+   (<l5> ^name l5 ^symmetry reflection r2 ^orientation <O1>)
+   # add squares to first orientation
+   (<O1> ^base yes ^square <O1S1> <O1S2> <O1S3> <O1S4> <O1S5>)
+   # fill in square info
+   (<O1S1> ^x 0 ^y 0)
+   (<O1S2> ^x 1 ^y 0)
+   (<O1S3> ^x 2 ^y 0)
+   (<O1S4> ^x 3 ^y 0)
+   (<O1S5> ^x 4 ^y 0)
+}
+# construct block O
+sp {apply*define-blocks*O
+   (state <s> ^name init
+              ^top-state.blocks <blocks>
+              ^operator.name define-blocks)
+-->
+   # add the block
+   (<blocks> ^block <O>)
+   # name it and create orientations
+   # TODO color?
+   (<O> ^name O ^symmetry reflection r2 r1 ^orientation <O1>)
+   # add squares to orientation
+   (<O1> ^base yes ^square <S1> <S2> <S3> <S4>)
+   # fille in square info
+   (<S1> ^x 0 ^y 0)
+   (<S2> ^x 0 ^y 1)
+   (<S3> ^x 1 ^y 0)
+   (<S4> ^x 1 ^y 1)
+}
+# construct block Z4
+sp {apply*define-blocks*Z4
+   (state <s> ^name init
+              ^top-state.blocks <blocks>
+              ^operator.name define-blocks)
+-->
+   # add the block
+   (<blocks> ^block <Z4>)
+   # name it and create orientations
+   # TODO color?
+   (<Z4> ^name Z4 ^symmetry r2 ^orientation <O1>)
+   # add squares to orientation
+   (<O1> ^base yes ^square <S1> <S2> <S3> <S4>)
+   # fill in square info
+   (<S1> ^x 0 ^y 0)
+   (<S2> ^x 0 ^y 1 )
+   (<S3> ^x -1 ^y 1)
+   (<S4> ^x -1 ^y 2)
+}
+
+# construct block V3
+sp {apply*define-blocks*V3
+   (state <s> ^name init
+              ^top-state.blocks <blocks>
+              ^operator.name define-blocks)
+-->
+   # add the block
+   (<blocks> ^block <V3>)
+   # name it anc create orientation
+   # TODO color?
+   (<V3> ^name V3 ^symmetry reflection ^orientation <O1>)
+   # add square to orientation
+   (<O1> ^base yes ^square <S1> <S2> <S3>)
+   # fill in square info
+   (<S1> ^x 0 ^y 0)
+   (<S2> ^x 0 ^y 1)
+   (<S3> ^x -1 ^y 1)
+}
+
+# construct block L4
+sp {apply*define-blocks*L4
+   (state <s> ^name init
+              ^top-state.blocks <blocks>
+              ^operator.name define-blocks)
+-->
+   # add the block
+   (<blocks> ^block <L4>)
+   # name it and create orientation
+   # TODO color?
+   (<L4> ^name L4 ^orientation <O1>)
+   # add squares to orientation
+   (<O1> ^base yes ^square <S1> <S2> <S3> <S4>)
+   # fill in square info
+   (<S1> ^x 0 ^y 0)
+   (<S2> ^x 0 ^y 1)
+   (<S3> ^x 1 ^y 0)
+   (<S4> ^x 2 ^y 0)
+}

@@ -1,0 +1,57 @@
+# elaborate other orientations
+# create the other orientation structure for (r2, reflection) blocks
+sp {elaborate*block*orientation*r2*reflection
+   (state <s> ^blocks.block <block>)
+   (<block> -^symmetry r1
+             ^orientation (<base> ^base yes))
+-->
+   (<block> ^orientation <Or1>)
+   (<Or1> ^rotation yes
+          ^from <base>)
+}
+# create rotation structures for non r2 blocks
+sp {elaborate*block*orientation*no*r2
+   (state <s> ^blocks.block <block>)
+   (<block> -^symmetry r2
+             ^orientation <base> <r1>)
+   (<base> ^base yes)
+   (<r1> ^rotation yes ^from <base>)
+-->
+   (<block> ^orientation <r2> <r3>)
+   (<r2> ^rotation yes ^from <r1>)
+   (<r3> ^rotation yes ^from <r2>)
+}
+# create reflected structures for non ref block
+sp {elaborate*block*orientation*no*ref
+   (state <s> ^blocks.block <block>)
+   (<block> -^symmetry reflection
+             ^orientation <or>)
+   (<or> ^<< base rotation >>)
+   (<or> -^reflection yes)
+-->
+   (<block> ^orientation <reflected>)
+   (<reflected> ^reflection yes
+                ^from <or>)
+}
+# copy squares with rotations
+sp {elaborate*copy*and*transform*squares*rotations
+   (state <s> ^blocks.block <block>)
+   (<block> ^orientation <base> <rotation>)
+   (<base> ^square (<sq> ^x <x> ^y <y>))
+   (<rotation> ^rotation yes
+               ^from <base>)
+-->
+   (<rotation> ^square <rsq>)
+   (<rsq> ^x (- 0 <y>) ^y <x>)
+}
+# copy squares with reflections
+sp {elaborate*copy*and*transform*square*reflection
+   (state <s> ^blocks.block <block>)
+   (<block> ^orientation <base> <reflection>)
+   (<base> ^square (<sq> ^x <x> ^y <y>))
+   (<reflection> ^reflection yes
+                 ^from <base>)
+-->
+   (<reflection> ^square <rsq>)
+   (<rsq> ^x (- 0 <x>) ^y <y>)
+}

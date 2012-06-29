@@ -1,0 +1,20 @@
+# add structure to hold hand
+sp {apply*construct-hand*base
+   (state <s> ^name init
+              ^operator.name construct-hand
+              ^top-state <ts>)
+-->
+   (<ts> ^hand <hand>)
+}
+
+# add an entry to the hand for each block
+sp {apply*construct-hand
+   (state <s> ^name init
+              ^operator.name construct-hand
+              ^top-state.blocks.block <block>
+              ^top-state.hand <hand>)
+-->
+   (<hand> ^block <b>)
+   (<b> ^block-def <block>
+        ^used no)
+}
