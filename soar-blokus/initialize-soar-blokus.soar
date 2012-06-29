@@ -5,11 +5,20 @@ sp {declare*top-state*name
    (<o> ^state-name soar-blokus)
 }
 
+# elaborate init op with procedure name
+sp {elaborate*init*procedure
+   (state <s> ^operator <o> +)
+   (<o> ^name init)
+-->
+   (<o> ^procedure init-procedure)
+}
+
 sp {propose*construct-board
    (state <s> ^name init)
 -->
    (<s> ^operator <o> +)
-   (<o> ^name construct-board)
+   (<o> ^name construct-board
+        ^sequence 1)
 }
 
 sp {apply*construct-board*create*board
@@ -35,15 +44,16 @@ gp {apply*construct-board*create*square
 
 # propose to construct the hand
 sp {propose*construct-hand
-   (state <s> ^name init
-              ^top-state <ts>)
+   (state <s> ^name init)
+#              ^top-state <ts>)
    # wait until the board is created
    # actually the hand doesn't depend on the board, but this way we can enforce that we know the last thing in init
 # TODO we can get rid of this now that we have init.soar
-   (<ts> ^board.square(^x 19 ^y 19))
+#   (<ts> ^board.square(^x 19 ^y 19))
 -->
-   (<s> ^operator <o> + >)
-   (<o> ^name construct-hand)
+   (<s> ^operator <o> +)
+   (<o> ^name construct-hand
+        ^sequence 2)
 }
 # construct the root hand structure
 sp {apply*construct-hand

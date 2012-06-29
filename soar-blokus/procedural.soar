@@ -1,0 +1,80 @@
+# procedural.soar is a pattern to easily define operators that are
+# selected and applied in sequence.
+
+# How to use:
+# * Propose an operator with the attribute ^procedure procedure-name
+# do not define application rules for the operator
+# TODO is there any way to enforce this in procedural.soar?
+# * Define operators which should fire in sequence within the resulting
+# subgoal. Each operator should have a ^sequence int
+# The operators will be selected and applied in increasing order of
+# sequence numbers
+
+# elaborate the subgoal with the procedure name
+# TODO is this an elaboration if it tests a selected operator?
+sp {elaborate*procedure*name
+   # detect operator no-change
+   (state <s> ^attribute operator ^choices none
+              ^superstate.operator.procedure <procedure-name>)
+-->
+   (<s> ^procedure <procedure-name>)
+}
+
+# elaborate subgoal with sequence numbers of operators that are to be
+# selected and applied
+sp {elaborate*procedure*sequence*numbers
+   (state <s> ^procedure <procedure-name>
+              ^operator <o> +)
+   (<o> ^sequence <sequence>)
+-->
+   (<s> ^sequence-op <sequence>)
+}
+
+# reject an operator in a procedure if there is another operator that
+# has not yet been selected and applied with a lower sequence number
+sp {prefer*reject*higher*sequence*operators
+   # if there are two proposed operators
+   (state <s> ^procedure <procedure-name>
+              ^operator <higher> +
+              ^operator <lower> +)
+   # and one has a higher sequence number
+   (<higher> ^sequence > <lower-sequence>)
+   # than the other
+   (<lower> ^sequence <lower-sequence>)
+   # and the lower operator has not been finished
+  -(<s> ^sequence-op-finished <lower-sequence>)
+-->
+   # then reject the higher operator
+   (<s> ^operator <higher> -)
+}
+# TODO an alternative to the above, would be to put a require on an operator
+# such that there are no unfinished operators before it.
+# that may require less elaborations
+
+# reject operators that have already been selected and applied
+# TODO the current implementation of this preference
+# excludes operators with the same sequence numbers
+sp {prefer*reject*finished*sequence*operators
+   (state <s> ^procedure <procedure-name>
+              ^sequence-op-finished <sequence>
+              ^operator <o> +)
+   (<o> ^sequence <sequence>)
+-->
+   (<s> ^operator <o> -)
+}
+
+# once an operator has been selected an applied, elaborate so on the subgoal
+sp {indicate*sequence*operator*finished
+   # detect a state no-change impasse
+   (state <s> ^attribute state ^choices none
+              # in a procedure
+              ^superstate.superstate (<procedure-state> ^procedure))
+   # get the operator
+   (<procedure-state> ^operator <o>)
+   # get the sequence
+   (<o> ^sequence <sequence>)
+-->
+   # mark operator as finished
+   (<procedure-state> ^sequence-op-finished <sequence>)
+   # TODO could these flags go directly on the operators?
+}
