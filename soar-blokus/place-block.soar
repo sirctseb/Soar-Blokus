@@ -9,8 +9,8 @@ sp {propose*place-block
    # orientation that has a square
    # that has a matching corner
    (<s> ^hand.block <block>)
-   (<block> ^orientation <or>
-           -^used yes)
+   (<block> ^block-def.orientation <or>
+            ^used no)
    (<or> ^square <block-square>)
    (<block-square> ^corner <dir>)
 -->

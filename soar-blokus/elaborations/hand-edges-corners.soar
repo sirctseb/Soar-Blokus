@@ -1,7 +1,7 @@
 
 # elaborate squares if their sides are edges of the block
 sp {north*edge
-   (state <s> ^hand.block.orientation <o>)
+   (state <s> ^hand.block.block-def.orientation <o>)
    (<o> ^square (<edge> ^x <x> ^y <y>))
    (<s> ^dir.north (^from <y> ^to <new-y>))
   -(<o> ^square (^x <x> ^y <new-y>))
@@ -9,7 +9,7 @@ sp {north*edge
    (<edge> ^edge north)
 }
 sp {east*edge
-   (state <s> ^hand.block.orientation <o>)
+   (state <s> ^hand.block.block-def.orientation <o>)
    (<o> ^square (<edge> ^x <x> ^y <y>))
    (<s> ^dir.east (^from <x> ^to <new-x>))
   -(<o> ^square (^x <new-x> ^y <y>))
@@ -17,7 +17,7 @@ sp {east*edge
    (<edge> ^edge east)
 }
 sp {south*edge
-   (state <s> ^hand.block.orientation <o>)
+   (state <s> ^hand.block.block-def.orientation <o>)
    (<o> ^square (<edge> ^x <x> ^y <y>))
    (<s> ^dir.north (^from <new-y> ^to <y>))
   -(<o> ^square (^x <x> ^y <new-y>))
@@ -25,7 +25,7 @@ sp {south*edge
    (<edge> ^edge south)
 }
 sp {west*edge
-   (state <s> ^hand.block.orientation <o>)
+   (state <s> ^hand.block.block-def.orientation <o>)
    (<o> ^square (<edge> ^x <x> ^y <y>))
    (<s> ^dir.east (^from <new-x> ^to <x>))
   -(<o> ^square (^x <new-x> ^y <y>))
@@ -34,22 +34,22 @@ sp {west*edge
 }
 # elaborate squares if their corners are convex corners of the block
 sp {northwest*corner
-   (state <s> ^hand.block.orientation.square(<corner> ^edge north west))
+   (state <s> ^hand.block.block-def.orientation.square(<corner> ^edge north west))
 -->
    (<corner> ^corner nw)
 }
 sp {northeast*corner
-   (state <s> ^hand.block.orientation.square(<corner> ^edge north east))
+   (state <s> ^hand.block.block-def.orientation.square(<corner> ^edge north east))
 -->
    (<corner> ^corner ne)
 }
 sp {southeast*corner
-   (state <s> ^hand.block.orientation.square(<corner> ^edge south east))
+   (state <s> ^hand.block.block-def.orientation.square(<corner> ^edge south east))
 -->
    (<corner> ^corner se)
 }
 sp {southwest*corner
-   (state <s> ^hand.block.orientation.square(<corner> ^edge south west))
+   (state <s> ^hand.block.block-def.orientation.square(<corner> ^edge south west))
 -->
    (<corner> ^corner sw)
 }

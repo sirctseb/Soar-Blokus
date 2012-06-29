@@ -17,7 +17,8 @@ sp {apply*update-hand
    (<o> ^name update-hand
         ^move.block <block>)
 -->
-   (<block> ^used yes)
+   (<block> ^used yes
+            ^used no -)
 }
 
 # remove command from output
