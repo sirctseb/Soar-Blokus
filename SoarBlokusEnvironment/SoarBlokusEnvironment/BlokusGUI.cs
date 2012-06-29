@@ -73,7 +73,7 @@ namespace SoarBlokus
 				break;
 			}
 		}
-
+		private sml.Kernel.UpdateEventCallback handleOutput;
 		private void startKernelButton_Click(object sender, EventArgs e)
 		{
 			// create kernel
@@ -95,7 +95,8 @@ namespace SoarBlokus
 			agent.LoadProductions(@"..\..\..\..\soar-blokus.soar");
 
 			// register for output
-			kernel.RegisterForUpdateEvent(sml.smlUpdateEventId.smlEVENT_AFTER_ALL_OUTPUT_PHASES, HandleAgentOuput, null);
+			handleOutput = new sml.Kernel.UpdateEventCallback(HandleAgentOuput);
+			kernel.RegisterForUpdateEvent(sml.smlUpdateEventId.smlEVENT_AFTER_ALL_OUTPUT_PHASES, handleOutput, null);
 		}
 
 		private void runAgentButton_Click(object sender, EventArgs e)
