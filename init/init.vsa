@@ -1,0 +1,7 @@
+VERSION 4
+\init\init.dm
+0	ROOT init init 1
+1	0	FOLDER all all 2
+2	0	FOLDER elaborations elaborations 3
+3	0	FOPERATOR init init.soar 4
+END

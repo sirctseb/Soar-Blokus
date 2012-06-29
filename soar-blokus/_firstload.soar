@@ -1,0 +1,9 @@
+pushd ../init
+source init.soar
+popd
+pushd ../ancestry
+source ancestry.soar
+popd
+pushd ../procedural
+source procedural.soar
+popd

@@ -1,0 +1,7 @@
+VERSION 4
+\procedural\procedural.dm
+0	ROOT procedural procedural 1
+1	0	FOLDER all all 4
+2	0	FOLDER elaborations elaborations 2
+3	0	FOPERATOR procedural procedural.soar 8
+END

@@ -10,11 +10,8 @@ VERSION 4
 7	3	FOPERATOR board-neighbors board-neighbors.soar 8
 8	3	FOPERATOR hand-edges-corners hand-edges-corners.soar 9
 9	3	FOPERATOR top-state top-state.soar 10
-10	0	FOPERATOR ancestry ancestry.soar 11
-11	0	FOPERATOR procedural procedural.soar 12
-12	0	OPERATOR init init.soar 13
-13	0	OPERATOR initialize-soar-blokus initialize-soar-blokus.soar 14
-14	0	OPERATOR place-block place-block.soar 15
-15	0	OPERATOR read-board read-board.soar 16
-16	0	OPERATOR update-hand update-hand.soar 17
+10	0	OPERATOR initialize-soar-blokus initialize-soar-blokus.soar 14
+11	0	OPERATOR place-block place-block.soar 15
+12	0	OPERATOR read-board read-board.soar 16
+13	0	OPERATOR update-hand update-hand.soar 17
 END

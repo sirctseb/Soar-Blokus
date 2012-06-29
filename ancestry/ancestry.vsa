@@ -1,0 +1,7 @@
+VERSION 4
+\ancestry\ancestry.dm
+0	ROOT ancestry ancestry 1
+1	0	FOLDER all all 4
+2	0	FOLDER elaborations elaborations 2
+3	0	FOPERATOR ancestry ancestry.soar 8
+END

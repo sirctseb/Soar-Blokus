@@ -1,0 +1,3 @@
+pushd ancestry
+source ancestry_source.soar
+popd

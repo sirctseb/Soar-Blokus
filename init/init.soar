@@ -1,0 +1,3 @@
+pushd init
+source init_source.soar
+popd

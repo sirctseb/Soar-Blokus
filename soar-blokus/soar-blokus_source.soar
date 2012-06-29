@@ -5,9 +5,6 @@ popd
 pushd elaborations
 source elaborations_source.soar
 popd
-source ancestry.soar
-source procedural.soar
-source init.soar
 source initialize-soar-blokus.soar
 source place-block.soar
 source read-board.soar
