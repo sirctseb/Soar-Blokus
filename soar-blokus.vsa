@@ -10,13 +10,13 @@ VERSION 4
 7	3	FOPERATOR board-neighbors board-neighbors.soar 8
 8	3	FOPERATOR hand-edges-corners hand-edges-corners.soar 9
 9	3	FOPERATOR top-state top-state.soar 10
-10	0	HLOPERATOR initialize-soar-blokus initialize-soar-blokus.soar initialize-soar-blokus 23 14
-11	10	HLOPERATOR procedural-pattern procedural-pattern.soar procedural-pattern 28 26
-12	11	OPERATOR construct-board construct-board.soar 33
-13	11	OPERATOR construct-hand construct-hand.soar 34
-14	11	HLOPERATOR define-blocks define-blocks.soar define-blocks 33 30
-15	14	FOPERATOR elaborations elaborations.soar 31
-16	0	OPERATOR place-block place-block.soar 15
-17	0	OPERATOR read-board read-board.soar 16
-18	0	OPERATOR update-hand update-hand.soar 17
+10	0	HLOPERATOR initialize-soar-blokus initialize-soar-blokus.soar initialize-soar-blokus 23 11
+11	10	HLOPERATOR procedural-pattern procedural-pattern.soar procedural-pattern 28 12
+12	11	OPERATOR construct-board construct-board.soar 13
+13	11	OPERATOR construct-hand construct-hand.soar 14
+14	11	HLOPERATOR define-blocks define-blocks.soar define-blocks 33 15
+15	14	FOPERATOR elaborations elaborations.soar 16
+16	0	OPERATOR place-block place-block.soar 17
+17	0	OPERATOR read-board read-board.soar 18
+18	0	OPERATOR update-hand update-hand.soar 19
 END
