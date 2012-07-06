@@ -1,19 +1,23 @@
+# elaborate if we need to read the board
+sp {elaborate*need*read-board
+   (state <s> ^name soar-blokus
+              ^io.input-link.square <square>)
+   (<square> -^ack yes)
+-->
+   (<s> ^need-read-board yes)
+}
 # propose to read input about the colors on the board
 sp {propose*read-board
    (state <s> ^name soar-blokus
-              ^io.input-link <input>)
-   (<input> ^square <square>)
-   # test that we haven't processed this square already
-   (<square> -^ack yes)
+              ^need-read-board yes)
 -->
    (<s> ^operator <o> + >)
-   (<o> ^name read-board
-        ^square <square>)
+   (<o> ^name read-board)
 }
 
 # make read-boards equal
 sp {preference*read-board*indifferent
-   (state <s> ^name soar-blokus
+   (state <s> ^disable yes ^name soar-blokus
               ^operator <o1> +
               ^operator <o2> +)
    (<o1> ^name read-board)
@@ -27,8 +31,8 @@ sp {apply*read-board
    (state <s> ^name soar-blokus
               ^operator <o>
               ^io.input-link <input>)
-   (<o> ^name read-board
-        ^square (<in-square> ^x <x> ^y <y> ^color <color>))
+   (<o> ^name read-board)
+   (<input> ^square (<in-square> ^x <x> ^y <y> ^color <color> -^ack yes))
    (<s> ^board.square (<square> ^x <x> ^y <y> ^color <old-color>))
 -->
    # change the color on the board square
